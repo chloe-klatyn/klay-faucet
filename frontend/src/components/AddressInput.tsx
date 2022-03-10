@@ -26,7 +26,8 @@ const Input = () => {
         },
         body: JSON.stringify({ receiver: receiver }),
       })
-      console.log('res: ', response)
+      const res = await response.json()
+      console.log('res: ', res)
     } catch (err: any) {
       console.error(err.message)
     }
