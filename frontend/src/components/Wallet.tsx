@@ -1,9 +1,10 @@
-import { useEffect, useContext } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import providerContext from '../context/context'
 import Caver from 'caver-js'
 
 const Wallet = () => {
-  const { klaytnProvider, setKaikasAddress } = useContext(providerContext)
+  const { klaytnProvider, kaikasAddress, setKaikasAddress } = useContext(providerContext)
+  const [network, setNetwork] = useState<any>()
 
   const connectKaikas = async () => {
     try {
@@ -31,18 +32,42 @@ const Wallet = () => {
     console.log('unlocked: ', unlocked)
   }
 
+  const detectNetwork = () => {
+    if (klaytnProvider) {
+      const networkId = klaytnProvider.networkVersion
+      if (networkId === 1001) {
+        setNetwork('Baobab')
+      } else if (networkId === 8217) {
+        setNetwork('Cypress')
+      }
+    }
+  }
+
+  const shortenAddress = (str: any) => {
+    return str.substring(0, 8) + '...' + str.substring(str.length - 4)
+  }
+
   useEffect(() => {
     if (klaytnProvider) {
       checkKaikasStatus()
       getKaikasBalance()
+      detectNetwork()
     }
   }, [klaytnProvider])
 
   return (
     <div>
-      <button className="mx-8" onClick={connectKaikas}>
-        Connect Wallet
-      </button>
+      {kaikasAddress ? (
+        <div className="mx-8 text-gray-600 space-x-4">
+          <span>{network} </span>
+          <span>|</span>
+          <span>{shortenAddress(kaikasAddress)}</span>
+        </div>
+      ) : (
+        <button className="mx-8" onClick={connectKaikas}>
+          Connect Wallet
+        </button>
+      )}
     </div>
   )
 }
