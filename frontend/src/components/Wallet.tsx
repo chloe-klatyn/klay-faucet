@@ -1,15 +1,15 @@
 import { useEffect, useContext } from 'react'
 import providerContext from '../context/context'
 import Caver from 'caver-js'
-import fs from 'fs'
 
 const Wallet = () => {
-  const { klaytnProvider } = useContext(providerContext)
+  const { klaytnProvider, setKaikasAddress } = useContext(providerContext)
 
   const connectKaikas = async () => {
     try {
       const accounts = await klaytnProvider.enable()
       console.log('accounts: ', accounts)
+      setKaikasAddress(accounts[0])
     } catch (error: any) {
       console.error(error.message)
     }
@@ -34,6 +34,7 @@ const Wallet = () => {
   useEffect(() => {
     if (klaytnProvider) {
       checkKaikasStatus()
+      getKaikasBalance()
     }
   }, [klaytnProvider])
 

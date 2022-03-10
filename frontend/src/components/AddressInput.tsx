@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import providerContext from '../context/context'
 
 const API_ENDPOINT = process.env.REACT_APP_API_URL
 
@@ -8,6 +9,7 @@ type FormData = {
 }
 
 const Input = () => {
+  const { kaikasAddress } = useContext(providerContext)
   const {
     register,
     handleSubmit,
@@ -50,6 +52,7 @@ const Input = () => {
             className="rounded-md shadow-sm block px-2 py-2 w-full border border-gray-300"
             type="text"
             {...register('recipient', { required: true, validate: validateAddress })}
+            value={kaikasAddress && kaikasAddress}
           />
           <button
             className="items-center rounded-full bg-slate-800 px-4 text-white w-2/5"
