@@ -1,6 +1,7 @@
 import logo from '../assets/logo.svg'
 import { useEffect, useContext } from 'react'
 import providerContext from '../context/context'
+import Wallet from './Wallet'
 
 declare const window: any
 
@@ -19,7 +20,7 @@ const Header = () => {
     <header>
       <div className="flex place-content-between p-3 items-center text-gray-900 bg-gray-100 shadow shadow-md">
         <img src={logo} alt="logo" width="50px" height="50px" />
-        <button className="mx-8">Connect Wallet</button>
+        <Wallet />
       </div>
     </header>
   )
