@@ -43,6 +43,7 @@ const Input = () => {
   return (
     <div className="flex flex-col items-center w-full">
       <div className="place-content-center font-body mb-6 tracking-widest w-1/3">
+        <label className="mb-4 text-grey-600">Enter KLAY address</label>
         <div className="flex space-x-2">
           <input
             className="rounded-md shadow-sm block px-2 py-2 w-full border border-gray-300"

@@ -5,9 +5,9 @@ import AddressInput from './components/AddressInput'
 
 const App = () => {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col h-screen">
       <Header />
-      <div>
+      <div className="mb-auto mt-20">
         <Intro />
         <AddressInput />
       </div>
