@@ -4,7 +4,7 @@ import { useState } from 'react'
 const API_ENDPOINT = process.env.REACT_APP_API_URL
 
 type FormData = {
-  receivingAddress: string
+  recipient: string
 }
 
 const Input = () => {
@@ -17,7 +17,7 @@ const Input = () => {
   } = useForm<FormData>()
 
   const requestTokens = async () => {
-    const receiver = getValues('receivingAddress')
+    const receiver = getValues('recipient')
     try {
       const response = await fetch(`${API_ENDPOINT}/faucet/sendKlay`, {
         method: 'POST',
@@ -48,7 +48,7 @@ const Input = () => {
           <input
             className="rounded-md shadow-sm block px-2 py-2 w-full border border-gray-300"
             type="text"
-            {...register('receivingAddress', { required: true, validate: validateAddress })}
+            {...register('recipient', { required: true, validate: validateAddress })}
           />
           <button
             className="items-center rounded-full bg-slate-800 px-4 text-white w-2/5"
@@ -57,6 +57,9 @@ const Input = () => {
             Give me KLAY
           </button>
         </div>
+        {errors.recipient && errors.recipient.type === 'validate' && (
+          <div className="text-amber-600">Please enter a valid address</div>
+        )}
       </div>
     </div>
   )
