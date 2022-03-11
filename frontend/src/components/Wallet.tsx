@@ -64,7 +64,7 @@ const Wallet = () => {
           <span>{shortenAddress(kaikasAddress)}</span>
         </div>
       ) : (
-        <button className="mx-8" onClick={connectKaikas}>
+        <button className="mx-8 border rounded-full px-4 py-2 border-grey" onClick={connectKaikas}>
           Connect Wallet
         </button>
       )}

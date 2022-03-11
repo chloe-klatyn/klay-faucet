@@ -2,8 +2,6 @@ import { useForm } from 'react-hook-form'
 import { useState, useContext } from 'react'
 import providerContext from '../context/context'
 
-const API_ENDPOINT = process.env.REACT_APP_API_URL
-
 type FormData = {
   recipient: string
 }
@@ -21,13 +19,15 @@ const Input = () => {
   const requestTokens = async () => {
     const receiver = getValues('recipient')
     try {
-      const response = await fetch(`${API_ENDPOINT}/faucet/sendKlay`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ receiver: receiver }),
-      })
+      const response = await fetch(
+        `https://api-baobab.wallet.klaytn.com/faucet/run?address=${receiver}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      )
       const res = await response.json()
       console.log('res: ', res)
     } catch (err: any) {
