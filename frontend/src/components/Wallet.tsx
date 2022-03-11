@@ -48,18 +48,18 @@ const Wallet = () => {
   }
 
   useEffect(() => {
-    if (klaytnProvider) {
+    if (klaytnProvider && kaikasAddress) {
       checkKaikasStatus()
       getKaikasBalance()
       detectNetwork()
     }
-  }, [klaytnProvider])
+  }, [klaytnProvider, kaikasAddress])
 
   return (
     <div>
       {kaikasAddress ? (
         <div className="mx-8 text-gray-600 space-x-4">
-          <span>{network} </span>
+          <span>{network}</span>
           <span>|</span>
           <span>{shortenAddress(kaikasAddress)}</span>
         </div>
